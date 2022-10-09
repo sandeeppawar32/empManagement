@@ -1,0 +1,19 @@
+version: "3"
+services:
+  postgresql:
+    image: "postgres:11.7"
+    container_name: "postgresql"
+    volumes:
+      - "./init-monkdev.sql:/docker-entrypoint-initdb.d/init-monkdev.sql"
+    networks:
+      default:
+        aliases:
+          - "emp-postgresql.local.springernature.io"
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=monk
+      - POSTGRES_PASSWORD=monk123
+      - POSTGRES_DB=monkdb
+
